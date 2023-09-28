@@ -24,3 +24,29 @@ heap.c:42:1: error: control reaches end of non-void function [-Werror=return-typ
 cc1: all warnings being treated as errors
 Compilation failed
 1ad1cc1
+Thu 28 Sep 2023 06:39:09 PM UTC: 
+ heap.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+In file included from test.c:4:
+heap.c: In function ‘createHeap’:
+heap.c:41:14: error: array subscript ‘Heap {aka struct Heap}[0]’ is partly outside array bounds of ‘unsigned char[8]’ [-Werror=array-bounds]
+   41 |     nuevoHeap->heapArray = (heapElem*)malloc(3 * sizeof(heapElem*));
+      |              ^~
+heap.c:36:30: note: referencing an object of size 8 allocated by ‘malloc’
+   36 |     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap*));
+      |                              ^~~~~~~~~~~~~~~~~~~~~
+heap.c:47:14: error: array subscript ‘Heap {aka struct Heap}[0]’ is partly outside array bounds of ‘unsigned char[8]’ [-Werror=array-bounds]
+   47 |     nuevoHeap->capac = 3;
+      |              ^~
+heap.c:36:30: note: referencing an object of size 8 allocated by ‘malloc’
+   36 |     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap*));
+      |                              ^~~~~~~~~~~~~~~~~~~~~
+heap.c:48:14: error: array subscript ‘Heap {aka struct Heap}[0]’ is partly outside array bounds of ‘unsigned char[8]’ [-Werror=array-bounds]
+   48 |     nuevoHeap->size = 0;
+      |              ^~
+heap.c:36:30: note: referencing an object of size 8 allocated by ‘malloc’
+   36 |     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap*));
+      |                              ^~~~~~~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+bd18fc3
