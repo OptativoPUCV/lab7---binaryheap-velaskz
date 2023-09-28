@@ -33,18 +33,19 @@ void heap_pop(Heap* pq){
 }
 
 Heap* createHeap(){
-    Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap*));
-    if (nuevoHeap == NULL){
-      return NULL; 
-    } 
-
-    nuevoHeap->heapArray = (heapElem*)malloc(3 * sizeof(heapElem*));
-    
-   if (nuevoHeap->heapArray == NULL) {
-        free(nuevoHeap);
-        return NULL; 
+    Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap));
+    if (nuevoHeap == NULL) {
+        return NULL; // Error: no se pudo asignar memoria para el montículo
     }
-    nuevoHeap->capac = 3;
+
+    nuevoHeap->heapArray = (heapElem*)malloc(3 * sizeof(heapElem));
+    if (nuevoHeap->heapArray == NULL) {
+        free(nuevoHeap);
+        return NULL; // Error: no se pudo asignar memoria para el arreglo de elementos
+    }
+
     nuevoHeap->size = 0;
+    nuevoHeap->capac = 3;
+
     return nuevoHeap;
 }
