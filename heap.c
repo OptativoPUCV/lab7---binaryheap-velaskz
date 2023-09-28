@@ -44,23 +44,9 @@ void heap_push(Heap* pq, void* data, int priority){
     pq->heapArray[i] = nuevoElemento;
     pq->size++;
 
-    // Reajuste (Heapify Up)
-    while (i != 0) {
-        int parentIndex = (i - 1) / 2;
-        if (pq->heapArray[parentIndex].priority > pq->heapArray[i].priority) {
-            // Intercambiar el elemento con su padre si es necesario
-            heapElem temp = pq->heapArray[i];
-            pq->heapArray[i] = pq->heapArray[parentIndex];
-            pq->heapArray[parentIndex] = temp;
-            i = parentIndex;
-        } else {
-            // El elemento está en la posición correcta
-            break;
-        }
-    }
+
 }
 
-// Función para calcular el índice del padre en el arreglo del montículo
 
 
 
