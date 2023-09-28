@@ -46,14 +46,12 @@ void heap_push(Heap* pq, void* data, int priority){
 
     while (i > 0) {
         int parentIndex = (i - 1) / 2;
-        if (pq->heapArray[i].priority < pq->heapArray[parentIndex].priority) {
-            // Intercambiar el elemento con su padre si es necesario
+        if (pq->heapArray[i].priority < pq->heapArray[parentIndex].priority){
             heapElem temp = pq->heapArray[i];
             pq->heapArray[i] = pq->heapArray[parentIndex];
             pq->heapArray[parentIndex] = temp;
             i = parentIndex;
         } else {
-            // El elemento está en la posición correcta
             break;
     }
 }
