@@ -100,3 +100,14 @@ heap.c:47:9: error: implicit declaration of function ‘swap’ [-Werror=implici
 cc1: all warnings being treated as errors
 Compilation failed
 d1d0b9e
+Thu 28 Sep 2023 06:50:57 PM UTC: 
+ heap.c | 22 +++++-----------------
+ 1 file changed, 5 insertions(+), 17 deletions(-)
+In file included from test.c:4:
+heap.c: In function ‘heap_push’:
+heap.c:34:14: error: variable ‘nuevoElemento’ set but not used [-Werror=unused-but-set-variable]
+   34 |     heapElem nuevoElemento;
+      |              ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+81d9f02
