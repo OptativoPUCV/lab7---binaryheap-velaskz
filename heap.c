@@ -27,35 +27,24 @@ void* heap_top(Heap* pq){
 
 
 void heap_push(Heap* pq, void* data, int priority){
-    if (pq == NULL || pq->size >= pq->capac) {
-        return; // El montículo es nulo o está lleno, no se puede agregar más elementos.
+    if (pq == NULL || pq->size >= pq->capac){
+        return;
     }
 
     heapElem nuevoElemento;
     nuevoElemento.data = data;
     nuevoElemento.priority = priority;
-
+    
     if (pq->size == pq->capac) {
         pq->capac *= 2;
-        pq->heapArray = (heapElem*)realloc(pq->heapArray, pq->capac * sizeof(heapElem));
-        if (pq->heapArray == NULL) {
-            // Manejar el error de realocación si es necesario
-            return;
-        }
+        pq->heapArray = realloc(pq->heapArray, pq->capac * sizeof(heapElem));
     }
-
+    
     int i = pq->size;
     pq->heapArray[i] = nuevoElemento;
     pq->size++;
 
-    // Reajuste (Heapify Up)
-    while (i != 0 && pq->heapArray[(i - 1) / 2].priority > pq->heapArray[i].priority) {
-        // Intercambiar el elemento con su padre si es necesario
-        heapElem temp = pq->heapArray[i];
-        pq->heapArray[i] = pq->heapArray[(i - 1) / 2];
-        pq->heapArray[(i - 1) / 2] = temp;
-        i = (i - 1) / 2;
-    }
+    
 }
 
 
