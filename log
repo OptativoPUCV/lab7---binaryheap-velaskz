@@ -2,3 +2,14 @@ Thu 28 Sep 2023 05:59:09 PM UTC:
  tests:  0|4
 total_score: 0/70
 e7283ef
+Thu 28 Sep 2023 06:22:34 PM UTC: 
+ heap.c | 1 +
+ 1 file changed, 1 insertion(+)
+In file included from test.c:4:
+heap.c: In function ‘createHeap’:
+heap.c:36:11: error: unused variable ‘nuevoHeap’ [-Werror=unused-variable]
+   36 |     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap*));
+      |           ^~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+5164371
