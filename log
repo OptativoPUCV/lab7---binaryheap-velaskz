@@ -82,3 +82,21 @@ Thu 28 Sep 2023 06:48:32 PM UTC:
  tests:  2|2
 total_score: 20/70
 66a08a9
+Thu 28 Sep 2023 06:49:58 PM UTC: 
+ heap.c | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+heap.c: In function ‘heap_push’:
+heap.c:35:9: error: ‘h’ undeclared (first use in this function)
+   35 |     if (h->size == h->capac) {
+      |         ^
+heap.c:35:9: note: each undeclared identifier is reported only once for each function it appears in
+heap.c:46:35: error: implicit declaration of function ‘parent’ [-Werror=implicit-function-declaration]
+   46 |     while (i != 0 && h->heapArray[parent(i)].priority < h->heapArray[i].priority) {
+      |                                   ^~~~~~
+heap.c:47:9: error: implicit declaration of function ‘swap’ [-Werror=implicit-function-declaration]
+   47 |         swap(&(h->heapArray[i]), &(h->heapArray[parent(i)]));
+      |         ^~~~
+cc1: all warnings being treated as errors
+Compilation failed
+d1d0b9e

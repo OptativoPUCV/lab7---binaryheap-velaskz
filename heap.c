@@ -27,8 +27,25 @@ void* heap_top(Heap* pq){
 
 
 void heap_push(Heap* pq, void* data, int priority){
-    if (pq == NULL || pq->size >= pq->capac){
-        return;
+    heapElem newElem;
+    newElem.data = data;
+    newElem.priority = priority;
+
+    // Asegurarse de que hay espacio en el montículo
+    if (h->size == h->capac) {
+        h->capac *= 2;
+        h->heapArray = realloc(h->heapArray, h->capac * sizeof(heapElem));
+    }
+
+    // Inserción inicial
+    int i = h->size;
+    h->heapArray[i] = newElem;
+    h->size++;
+
+    // Reajuste (Heapify Up)
+    while (i != 0 && h->heapArray[parent(i)].priority < h->heapArray[i].priority) {
+        swap(&(h->heapArray[i]), &(h->heapArray[parent(i)]));
+        i = parent(i);
     }
 }
 
