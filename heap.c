@@ -24,7 +24,9 @@ void* heap_top(Heap* pq){
     return pq->heapArray[0].data;
 }
 
-
+int parent(int i){
+    return (i - 1) / 2;
+}
 
 void heap_push(Heap* pq, void* data, int priority){
     if (pq == NULL || pq->size >= pq->capac){
@@ -44,8 +46,17 @@ void heap_push(Heap* pq, void* data, int priority){
     pq->heapArray[i] = nuevoElemento;
     pq->size++;
 
-    
+    while (i != 0 && pq->heapArray[parent(i)].priority > pq->heapArray[i].priority) {
+        // Intercambiar el elemento con su padre si es necesario
+        heapElem temp = pq->heapArray[i];
+        pq->heapArray[i] = pq->heapArray[parent(i)];
+        pq->heapArray[parent(i)] = temp;
+        i = parent(i);
+    }
 }
+
+// Función para calcular el índice del padre en el arreglo del montículo
+
 
 
 void heap_pop(Heap* pq){
