@@ -28,7 +28,7 @@ void* heap_top(Heap* pq){
 
 void heap_push(Heap* pq, void* data, int priority){
     if (pq == NULL || pq->size >= pq->capac) {
-        return; // El montículo es nulo o está lleno, no se puede agregar más elementos.
+        return; 
     }
 
     heapElem nuevoElemento;
@@ -38,10 +38,6 @@ void heap_push(Heap* pq, void* data, int priority){
     if (pq->size == pq->capac) {
         pq->capac *= 2;
         pq->heapArray = (heapElem*)realloc(pq->heapArray, pq->capac * sizeof(heapElem));
-        if (pq->heapArray == NULL) {
-            // Manejar el error de realocación si es necesario
-            return;
-        }
     }
 
     int i = pq->size;
