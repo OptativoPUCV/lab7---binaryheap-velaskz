@@ -24,34 +24,43 @@ void* heap_top(Heap* pq){
     return pq->heapArray[0].data;
 }
 
-int parent(int i){
-    return (i - 1) / 2;
-}
+
 
 void heap_push(Heap* pq, void* data, int priority){
-    if (pq == NULL || pq->size >= pq->capac){
-        return;
+    if (pq == NULL || pq->size >= pq->capac) {
+        return; // El montículo es nulo o está lleno, no se puede agregar más elementos.
     }
 
     heapElem nuevoElemento;
     nuevoElemento.data = data;
     nuevoElemento.priority = priority;
-    
+
     if (pq->size == pq->capac) {
         pq->capac *= 2;
-        pq->heapArray = realloc(pq->heapArray, pq->capac * sizeof(heapElem));
+        pq->heapArray = (heapElem*)realloc(pq->heapArray, pq->capac * sizeof(heapElem));
+        if (pq->heapArray == NULL) {
+            // Manejar el error de realocación si es necesario
+            return;
+        }
     }
-    
+
     int i = pq->size;
     pq->heapArray[i] = nuevoElemento;
     pq->size++;
 
-    while (i != 0 && pq->heapArray[parent(i)].priority > pq->heapArray[i].priority) {
-        // Intercambiar el elemento con su padre si es necesario
-        heapElem temp = pq->heapArray[i];
-        pq->heapArray[i] = pq->heapArray[parent(i)];
-        pq->heapArray[parent(i)] = temp;
-        i = parent(i);
+    // Reajuste (Heapify Up)
+    while (i != 0) {
+        int parentIndex = (i - 1) / 2;
+        if (pq->heapArray[parentIndex].priority > pq->heapArray[i].priority) {
+            // Intercambiar el elemento con su padre si es necesario
+            heapElem temp = pq->heapArray[i];
+            pq->heapArray[i] = pq->heapArray[parentIndex];
+            pq->heapArray[parentIndex] = temp;
+            i = parentIndex;
+        } else {
+            // El elemento está en la posición correcta
+            break;
+        }
     }
 }
 
