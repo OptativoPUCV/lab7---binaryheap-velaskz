@@ -122,3 +122,9 @@ heap.c:34:14: error: variable ‘nuevoElemento’ set but not used [-Werror=unus
 cc1: all warnings being treated as errors
 Compilation failed
 afd4b50
+Thu 28 Sep 2023 06:54:20 PM UTC: 
+ heap.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+ tests:  3|2
+total_score: 25/70
+fb7b0b8
