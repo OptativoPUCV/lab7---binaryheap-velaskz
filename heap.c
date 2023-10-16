@@ -24,13 +24,43 @@ void* heap_top(Heap* pq){
     return pq->heapArray[0].data;
 }
 
+void ampliar(Heap* pq){
+    int nuevaCapacidad = pq->capac * 2;
+    heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
 
-
-void heap_push(Heap* pq, void* data, int priority) {
-
+    if (nuevoArray != NULL) {
+        pq->heapArray = nuevoArray;
+        pq->capac = nuevaCapacidad;
+    }
 }
 
+void heap_push(Heap* pq, void* data, int priority){
+    if (pq->size == pq->capac){
+        ampliar(pq);
+    }
 
+    heapElem nuevoElemento;
+    nuevoElemento.data = data;
+    nuevoElemento.priority = priority;
+
+    pq->heapArray[pq->size] = nuevoElemento;
+    int k = pq->size;
+
+    while (k > 0) {
+        int padre = (k - 1) / 2;
+
+        if (pq->heapArray[k].priority < pq->heapArray[padre].priority){
+            heapElem temp = pq->heapArray[k];
+            pq->heapArray[k] = pq->heapArray[padre];
+            pq->heapArray[padre] = temp;
+            k = padre;
+        } else {
+            break;
+        }
+    }
+
+    pq->size++;
+}
 
 
 void heap_pop(Heap* pq) {
