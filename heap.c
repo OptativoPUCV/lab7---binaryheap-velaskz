@@ -25,8 +25,7 @@ void* heap_top(Heap* pq){
 }
 
 
-void swapElements(heapElem* a, heapElem* b) {
-    // Intercambia los elementos 'data' y 'priority'
+void intercambio(heapElem* a, heapElem* b){
     int aux_priority = a->priority;
     a->priority = b->priority;
     b->priority = aux_priority;
@@ -36,37 +35,7 @@ void swapElements(heapElem* a, heapElem* b) {
     b->data = aux_data;
 }
 
-void ampliar(Heap* pq) {
-    int nuevaCapacidad = pq->capac * 2 + 1;
-    heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
-
-    if (nuevoArray != NULL) {
-        pq->heapArray = nuevoArray;
-        pq->capac = nuevaCapacidad;
-    }
-}
-
-void heap_push(Heap* pq, void* data, int priority) {
-    if (pq->size == pq->capac) {
-        ampliar(pq);
-    }
-
-    pq->heapArray[pq->size].data = data;
-    pq->heapArray[pq->size].priority = priority;
-    int i = pq->size;
-
-    while (i != 0 && pq->heapArray[(i - 1) / 2].priority < pq->heapArray[i].priority) {
-        // Utiliza la función de intercambio
-        swapElements(&(pq->heapArray[i]), &(pq->heapArray[(i - 1) / 2]));
-        i = (i - 1) / 2;
-    }
-
-    pq->size++;
-}
-
-
-
-/*void ampliar(Heap* pq){
+void ampliar(Heap* pq){
     int nuevaCapacidad = pq->capac * 2 + 1;
     heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
 
@@ -77,31 +46,21 @@ void heap_push(Heap* pq, void* data, int priority) {
 }
 
 void heap_push(Heap* pq, void* data, int priority){
-    if (pq->size == pq->capac) {
+    if (pq->size == pq->capac){
         ampliar(pq);
     }
 
-    bool entro = false;
     pq->heapArray[pq->size].data = data;
     pq->heapArray[pq->size].priority = priority;
-    int anteriorK = pq->size;
-    for (int k = pq->size;k > 0 || entro == false;k = (k-1)/2)
-    {
-        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority)
-        {
-            int aux = pq->heapArray[k].priority;
-            pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
-            pq->heapArray[anteriorK].priority = aux;
+    int i = pq->size;
 
-            void* data = pq->heapArray[k].data;
-            pq->heapArray[k].data = pq->heapArray[anteriorK].data;
-            pq->heapArray[anteriorK].data = data;
-        }
-        anteriorK = k;
-        if (k == 0) entro = true;
+    while (i != 0 && pq->heapArray[(i - 1) / 2].priority < pq->heapArray[i].priority){
+        intercambio(&(pq->heapArray[i]), &(pq->heapArray[(i - 1) / 2]));
+        i = (i - 1) / 2;
     }
+
     pq->size++;
-}*/
+}
 
 void heap_pop(Heap* pq){
     if (pq->size == 0){
@@ -129,7 +88,6 @@ void heap_pop(Heap* pq){
             break;
         }
 
-        // Intercambiar elementos si es necesario
         heapElem temp = pq->heapArray[i];
         pq->heapArray[i] = pq->heapArray[masLargo];
         pq->heapArray[masLargo] = temp;
