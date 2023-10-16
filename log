@@ -345,3 +345,24 @@ Mon 16 Oct 2023 01:26:06 AM UTC:
  tests:  4|1
 total_score: 50/70
 8ed6a2c
+Mon 16 Oct 2023 01:27:54 AM UTC: 
+ heap.c | 26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
+In file included from test.c:4:
+heap.c: In function ‘heap_push’:
+heap.c:31:9: error: implicit declaration of function ‘agrandarArreglo’ [-Werror=implicit-function-declaration]
+   31 |         agrandarArreglo(pq); ifyi
+      |         ^~~~~~~~~~~~~~~
+heap.c:31:30: error: ‘ifyi’ undeclared (first use in this function)
+   31 |         agrandarArreglo(pq); ifyi
+      |                              ^~~~
+heap.c:31:30: note: each undeclared identifier is reported only once for each function it appears in
+heap.c:31:34: error: expected ‘;’ before ‘}’ token
+   31 |         agrandarArreglo(pq); ifyi
+      |                                  ^
+      |                                  ;
+   32 |     }
+      |     ~                             
+cc1: all warnings being treated as errors
+Compilation failed
+c25d151
