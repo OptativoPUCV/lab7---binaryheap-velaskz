@@ -56,12 +56,13 @@ void heap_pop(Heap* pq) {
     pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
     pq->size--;
 
-    // Reordenar el heap después de quitar el elemento superior
     int i = 0;
+    int left_child, right_child, smallest;
+
     while (1) {
-        int left_child = 2 * i + 1;
-        int right_child = 2 * i + 2;
-        int smallest = i;
+        left_child = 2 * i + 1;
+        right_child = 2 * i + 2;
+        smallest = i;
 
         if (left_child < pq->size && pq->heapArray[left_child].priority < pq->heapArray[smallest].priority) {
             smallest = left_child;
