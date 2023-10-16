@@ -26,7 +26,7 @@ void* heap_top(Heap* pq){
 }
 
 void ampliar(Heap* pq){
-    int nuevaCapacidad = pq->capac * 2;
+    int nuevaCapacidad = pq->capac * 2 + 1;
     heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
 
     if (nuevoArray != NULL) {
