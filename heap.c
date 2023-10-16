@@ -17,7 +17,6 @@ typedef struct Heap{
   int capac;
 } Heap;
 
-
 void* heap_top(Heap* pq){
     if (pq->size == 0){
         return NULL;
@@ -29,48 +28,41 @@ void ampliar(Heap* pq){
     int nuevaCapacidad = pq->capac * 2 + 1;
     heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
 
-    if (nuevoArray != NULL) {
+    if (nuevoArray != NULL){
         pq->heapArray = nuevoArray;
         pq->capac = nuevaCapacidad;
     }
 }
 
-void heap_push(Heap* pq, void* data, int priority) {
+void heap_push(Heap* pq, void* data, int priority){
     if (pq->size == pq->capac) {
         ampliar(pq);
     }
 
+    bool entro = false;
     pq->heapArray[pq->size].data = data;
     pq->heapArray[pq->size].priority = priority;
-
-    int k = pq->size;
-    bool entro = false;
-
-    while (k > 0 || entro == false) {
-        int anteriorK = k;
-        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority) {
+    int anteriorK = pq->size;
+    for (int k = pq->size;k > 0 || entro == false;k = (k-1)/2)
+    {
+        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority)
+        {
             int aux = pq->heapArray[k].priority;
             pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
             pq->heapArray[anteriorK].priority = aux;
 
-            void* temp = pq->heapArray[k].data;
+            void* data = pq->heapArray[k].data;
             pq->heapArray[k].data = pq->heapArray[anteriorK].data;
-            pq->heapArray[anteriorK].data = temp;
+            pq->heapArray[anteriorK].data = data;
         }
         anteriorK = k;
-        if (k == 0) {
-            entro = true;
-        }
-        k = (k - 1) / 2;
+        if (k == 0) entro = true;
     }
-
     pq->size++;
 }
 
-
-
-void heap_pop(Heap* pq) {
-    if (pq->size == 0) {
+void heap_pop(Heap* pq){
+    if (pq->size == 0){
         return;
     }
 
@@ -79,20 +71,19 @@ void heap_pop(Heap* pq) {
 
     int i = 0;
 
-    while (1) {
+    while (1){
         int hijoIzquierda = 2 * i + 1;
         int hijoDerecha = 2 * i + 2;
         int masLargo = i;
 
-        // Encontrar el hijo con la mayor prioridad
-        if (hijoIzquierda < pq->size && pq->heapArray[hijoIzquierda].priority > pq->heapArray[masLargo].priority) {
+        if (hijoIzquierda < pq->size && pq->heapArray[hijoIzquierda].priority > pq->heapArray[masLargo].priority){
             masLargo = hijoIzquierda;
         }
-        if (hijoDerecha < pq->size && pq->heapArray[hijoDerecha].priority > pq->heapArray[masLargo].priority) {
+        if (hijoDerecha < pq->size && pq->heapArray[hijoDerecha].priority > pq->heapArray[masLargo].priority){
             masLargo = hijoDerecha;
         }
 
-        if (masLargo == i) {
+        if (masLargo == i){
             break;
         }
 
@@ -104,7 +95,6 @@ void heap_pop(Heap* pq) {
         i = masLargo;
     }
 }
-
 
 Heap* createHeap(){
     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap));
