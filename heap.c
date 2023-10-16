@@ -40,10 +40,6 @@ void heap_push(Heap* pq, void* data, int priority) {
         ampliar(pq);
     }
 
-    if (pq->size == pq->capac) {
-        agrandarArreglo(pq);
-    }
-
     heapElem nuevoElemento;
     nuevoElemento.data = data;
     nuevoElemento.priority = priority;
