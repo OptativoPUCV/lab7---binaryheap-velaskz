@@ -40,25 +40,32 @@ void heap_push(Heap* pq, void* data, int priority) {
         ampliar(pq);
     }
 
-    bool entro = false;
-    pq->heapArray[pq->size].data = data;
-    pq->heapArray[pq->size].priority = priority;
-    int anteriorK = pq->size;
-    for (int k = pq->size;k > 0 || entro == false;k = (k-1)/2)
-    {
-        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority)
-        {
-            int aux = pq->heapArray[k].priority;
-            pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
-            pq->heapArray[anteriorK].priority = aux;
-
-            void* data = pq->heapArray[k].data;
-            pq->heapArray[k].data = pq->heapArray[anteriorK].data;
-            pq->heapArray[anteriorK].data = data;
-        }
-        anteriorK = k;
-        if (k == 0) entro = true;
+    if (pq->size == pq->capac) {
+        agrandarArreglo(pq);
     }
+
+    heapElem nuevoElemento;
+    nuevoElemento.data = data;
+    nuevoElemento.priority = priority;
+
+    int k = pq->size;
+    pq->heapArray[k] = nuevoElemento;
+
+    while (k > 0) {
+        int parent = (k - 1) / 2;
+
+        if (pq->heapArray[k].priority < pq->heapArray[parent].priority) {
+            // Intercambiar elementos si la prioridad del hijo es menor que la del padre
+            heapElem temp = pq->heapArray[k];
+            pq->heapArray[k] = pq->heapArray[parent];
+            pq->heapArray[parent] = temp;
+        } else {
+            break;
+        }
+
+        k = parent;
+    }
+
     pq->size++;
 }
 

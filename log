@@ -419,3 +419,14 @@ Mon 16 Oct 2023 01:46:56 AM UTC:
  tests:  8|0
 total_score: 70/70
 33e9aa7
+Mon 16 Oct 2023 01:48:48 AM UTC: 
+ heap.c | 43 +++++++++++++++++++++++++------------------
+ 1 file changed, 25 insertions(+), 18 deletions(-)
+In file included from test.c:4:
+heap.c: In function ‘heap_push’:
+heap.c:44:9: error: implicit declaration of function ‘agrandarArreglo’ [-Werror=implicit-function-declaration]
+   44 |         agrandarArreglo(pq);
+      |         ^~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+a0f2ced
