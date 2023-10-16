@@ -51,7 +51,6 @@ void heap_pop(Heap* pq) {
         return;
     }
 
-    // Mover el último elemento al inicio del heap
     pq->heapArray[0] = pq->heapArray[pq->size - 1];
     pq->size--;
 
