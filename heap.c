@@ -36,15 +36,19 @@ void swapElements(heapElem* a, heapElem* b) {
     b->data = aux_data;
 }
 
+void ampliar(Heap* pq) {
+    int nuevaCapacidad = pq->capac * 2 + 1;
+    heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
+
+    if (nuevoArray != NULL) {
+        pq->heapArray = nuevoArray;
+        pq->capac = nuevaCapacidad;
+    }
+}
+
 void heap_push(Heap* pq, void* data, int priority) {
     if (pq->size == pq->capac) {
-        int nuevaCapacidad = pq->capac * 2 + 1;
-        heapElem* nuevoArray = (heapElem*)realloc(pq->heapArray, nuevaCapacidad * sizeof(heapElem));
-
-        if (nuevoArray != NULL) {
-            pq->heapArray = nuevoArray;
-            pq->capac = nuevaCapacidad;
-        }
+        ampliar(pq);
     }
 
     pq->heapArray[pq->size].data = data;
@@ -59,6 +63,7 @@ void heap_push(Heap* pq, void* data, int priority) {
 
     pq->size++;
 }
+
 
 
 /*void ampliar(Heap* pq){
