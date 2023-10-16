@@ -44,13 +44,15 @@ void heap_push(Heap* pq, void* data, int priority){
     pq->heapArray[i] = nuevoElemento;
     pq->size++;
 
-
 }
 
 
 
 
 void heap_pop(Heap* pq){
+    if (pq->size == 0){
+        return;
+    }
 
 }
 
