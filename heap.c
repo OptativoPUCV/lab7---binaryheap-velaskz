@@ -28,7 +28,8 @@ void* heap_top(Heap* pq){
 
 void heap_push(Heap* pq, void* data, int priority) {
     if (pq->size == pq->capac) {
-        agrandarArreglo(pq); ifyi
+        // El arreglo está lleno; puedes manejar esta situación según tus necesidades
+        return;
     }
 
     heapElem nuevoElemento;
@@ -54,6 +55,7 @@ void heap_push(Heap* pq, void* data, int priority) {
 
     pq->size++;
 }
+
 
 
 void heap_pop(Heap* pq) {

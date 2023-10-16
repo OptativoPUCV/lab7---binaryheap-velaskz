@@ -366,3 +366,9 @@ heap.c:31:34: error: expected ‘;’ before ‘}’ token
 cc1: all warnings being treated as errors
 Compilation failed
 c25d151
+Mon 16 Oct 2023 01:35:59 AM UTC: 
+ heap.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ tests:  3|1
+total_score: 45/70
+a34a1ea
