@@ -71,7 +71,6 @@ void heap_pop(Heap* pq) {
             break;
         }
 
-        // Intercambiar elementos si es necesario
         heapElem temp = pq->heapArray[i];
         pq->heapArray[i] = pq->heapArray[masLargo];
         pq->heapArray[masLargo] = temp;
