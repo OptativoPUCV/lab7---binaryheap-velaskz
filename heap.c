@@ -51,43 +51,34 @@ void heap_pop(Heap* pq) {
         return;
     }
 
-    pq->heapArray[0].data = pq->heapArray[pq->size - 1].data;
-    pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
+    pq->heapArray[0] = pq->heapArray[pq->size - 1];
     pq->size--;
 
-    size_t k = 0;
-    size_t anteriorK = k;
+    int i = 0;
+    while (1) {
+        int left_child = 2 * i + 1;
+        int right_child = 2 * i + 2;
+        int smallest = i;
 
-    int izquierda = 2 * k + 1;
-    int derecha = 2 * k + 2;
-
-    while (izquierda < pq->size || derecha < pq->size) {
-        anteriorK = k;
-
-        if (izquierda < pq->size && derecha < pq->size) {
-            if (pq->heapArray[izquierda].priority < pq->heapArray[derecha].priority) {
-                k = derecha;
-            } else {
-                k = izquierda;
-            }
-        } else if (izquierda < pq->size) {
-            k = izquierda;
-        } else if (derecha < pq->size) {
-            k = derecha;
+        if (left_child < pq->size && pq->heapArray[left_child].priority < pq->heapArray[smallest].priority) {
+            smallest = left_child;
+        }
+        if (right_child < pq->size && pq->heapArray[right_child].priority < pq->heapArray[smallest].priority) {
+            smallest = right_child;
         }
 
-        int aux = pq->heapArray[k].priority;
-        pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
-        pq->heapArray[anteriorK].priority = aux;
-
-        void* data = pq->heapArray[k].data;
-        pq->heapArray[k].data = pq->heapArray[anteriorK].data;
-        pq->heapArray[anteriorK].data = data;
-
-        izquierda = 2 * k + 1;
-        derecha = 2 * k + 2;
+        if (smallest != i) {
+            // Intercambiar elementos si la prioridad del hijo es menor que la del padre
+            heapElem temp = pq->heapArray[i];
+            pq->heapArray[i] = pq->heapArray[smallest];
+            pq->heapArray[smallest] = temp;
+            i = smallest;
+        } else {
+            break;
+        }
     }
 }
+
 
 
 Heap* createHeap(){
