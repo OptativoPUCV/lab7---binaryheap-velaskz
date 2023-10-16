@@ -57,28 +57,28 @@ void heap_pop(Heap* pq) {
     int i = 0;
 
     while (1) {
-        int left_child = 2 * i + 1;
-        int right_child = 2 * i + 2;
-        int largest = i;
+        int hijoIzquierda = 2 * i + 1;
+        int hijoDerecha = 2 * i + 2;
+        int masLargo = i;
 
         // Encontrar el hijo con la mayor prioridad
-        if (left_child < pq->size && pq->heapArray[left_child].priority > pq->heapArray[largest].priority) {
-            largest = left_child;
+        if (hijoIzquierda < pq->size && pq->heapArray[hijoIzquierda].priority > pq->heapArray[masLargo].priority) {
+            masLargo = hijoIzquierda;
         }
-        if (right_child < pq->size && pq->heapArray[right_child].priority > pq->heapArray[largest].priority) {
-            largest = right_child;
+        if (hijoDerecha < pq->size && pq->heapArray[hijoDerecha].priority > pq->heapArray[masLargo].priority) {
+            masLargo = hijoDerecha;
         }
 
-        if (largest == i) {
+        if (masLargo == i) {
             break;
         }
 
         // Intercambiar elementos si es necesario
         heapElem temp = pq->heapArray[i];
-        pq->heapArray[i] = pq->heapArray[largest];
-        pq->heapArray[largest] = temp;
+        pq->heapArray[i] = pq->heapArray[masLargo];
+        pq->heapArray[masLargo] = temp;
 
-        i = largest;
+        i = masLargo;
     }
 }
 
