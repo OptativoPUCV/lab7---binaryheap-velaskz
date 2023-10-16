@@ -240,3 +240,20 @@ Mon 16 Oct 2023 12:35:51 AM UTC:
  tests:  3|2
 total_score: 25/70
 a0ca811
+Mon 16 Oct 2023 12:40:32 AM UTC: 
+ heap.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+In file included from test.c:4:
+heap.c: In function ‘heap_pop’:
+heap.c:64:13: error: unused variable ‘max’ [-Werror=unused-variable]
+   64 |         int max = i;
+      |             ^~~
+heap.c:63:13: error: unused variable ‘der’ [-Werror=unused-variable]
+   63 |         int der = 2 * i + 2;
+      |             ^~~
+heap.c:62:13: error: unused variable ‘izq’ [-Werror=unused-variable]
+   62 |         int izq = 2 * i + 1;
+      |             ^~~
+cc1: all warnings being treated as errors
+Compilation failed
+3d5912d

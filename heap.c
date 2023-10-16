@@ -53,6 +53,17 @@ void heap_pop(Heap* pq){
     if (pq->size == 0){
         return;
     }
+    pq->heapArray[0].data = pq->heapArray[pq->size - 1].data;
+    pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
+    pq->size--;
+
+    int i = 0;
+    while (i < pq->size) {
+        int izq = 2 * i + 1;
+        int der = 2 * i + 2;
+        int max = i;
+
+    }
 
 }
 
