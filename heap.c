@@ -51,9 +51,12 @@ void heap_pop(Heap* pq) {
         return;
     }
 
-    pq->heapArray[0] = pq->heapArray[pq->size - 1];
+    // Mover el último elemento al inicio del heap
+    pq->heapArray[0].data = pq->heapArray[pq->size - 1].data;
+    pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
     pq->size--;
 
+    // Reordenar el heap después de quitar el elemento superior
     int i = 0;
     while (1) {
         int left_child = 2 * i + 1;
@@ -63,6 +66,7 @@ void heap_pop(Heap* pq) {
         if (left_child < pq->size && pq->heapArray[left_child].priority < pq->heapArray[smallest].priority) {
             smallest = left_child;
         }
+
         if (right_child < pq->size && pq->heapArray[right_child].priority < pq->heapArray[smallest].priority) {
             smallest = right_child;
         }
@@ -77,6 +81,7 @@ void heap_pop(Heap* pq) {
             break;
         }
     }
+    
 }
 
 
