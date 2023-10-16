@@ -466,3 +466,24 @@ Mon 16 Oct 2023 02:30:33 AM UTC:
  tests:  8|0
 total_score: 70/70
 9a8a2a9
+Mon 16 Oct 2023 02:34:47 AM UTC: 
+ heap.c | 40 ++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+heap.c: In function ‘heap_push’:
+heap.c:54:36: error: implicit declaration of function ‘parent’ [-Werror=implicit-function-declaration]
+   54 |     while (i != 0 && pq->heapArray[parent(i)].priority < pq->heapArray[i].priority) {
+      |                                    ^~~~~~
+heap.c:56:70: error: expected ‘)’ before ‘;’ token
+   56 |         swapElements(&(pq->heapArray[i]), &(pq->heapArray[parent(i)]);
+      |                     ~                                                ^
+      |                                                                      )
+heap.c:57:23: error: expected ‘;’ before ‘}’ token
+   57 |         i = parent(i);
+      |                       ^
+      |                       ;
+   58 |     }
+      |     ~                  
+cc1: all warnings being treated as errors
+Compilation failed
+78cb92b
