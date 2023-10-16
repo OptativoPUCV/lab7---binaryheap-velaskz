@@ -257,3 +257,9 @@ heap.c:62:13: error: unused variable ‘izq’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 3d5912d
+Mon 16 Oct 2023 12:43:18 AM UTC: 
+ heap.c | 28 ++++++++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
+ tests:  3|2
+total_score: 25/70
+4e99cdf

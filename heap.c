@@ -50,19 +50,39 @@ void heap_push(Heap* pq, void* data, int priority){
 
 
 void heap_pop(Heap* pq){
-    if (pq->size == 0){
+    if (pq->size == 0) {
         return;
     }
+
+    // Mover el último elemento al inicio del heap
     pq->heapArray[0].data = pq->heapArray[pq->size - 1].data;
     pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
     pq->size--;
 
+    // Reordenar el heap después de quitar el elemento superior
     int i = 0;
-    while (i < pq->size) {
-        int izq = 2 * i + 1;
-        int der = 2 * i + 2;
-        int max = i;
+    while (1) {
+        int left_child = 2 * i + 1;
+        int right_child = 2 * i + 2;
+        int smallest = i;
 
+        if (left_child < pq->size && pq->heapArray[left_child].priority < pq->heapArray[smallest].priority) {
+            smallest = left_child;
+        }
+
+        if (right_child < pq->size && pq->heapArray[right_child].priority < pq->heapArray[smallest].priority) {
+            smallest = right_child;
+        }
+
+        if (smallest != i) {
+            // Intercambiar elementos si la prioridad del hijo es menor que la del padre
+            heapElem temp = pq->heapArray[i];
+            pq->heapArray[i] = pq->heapArray[smallest];
+            pq->heapArray[smallest] = temp;
+            i = smallest;
+        } else {
+            break;
+        }
     }
 
 }
