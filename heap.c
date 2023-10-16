@@ -27,28 +27,7 @@ void* heap_top(Heap* pq){
 
 
 void heap_push(Heap* pq, void* data, int priority) {
-    heapElem nuevoElemento;
-    nuevoElemento.data = data;
-    nuevoElemento.priority = priority;
 
-    pq->heapArray[pq->size] = nuevoElemento;
-    int k = pq->size;
-
-    while (k > 0) {
-        int parent = (k - 1) / 2;
-
-        if (pq->heapArray[k].priority < pq->heapArray[parent].priority) {
-            // Intercambiar elementos si la prioridad del hijo es menor que la del padre
-            heapElem temp = pq->heapArray[k];
-            pq->heapArray[k] = pq->heapArray[parent];
-            pq->heapArray[parent] = temp;
-            k = parent;
-        } else {
-            break;
-        }
-    }
-
-    pq->size++;
 }
 
 
