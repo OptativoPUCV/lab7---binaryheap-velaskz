@@ -34,38 +34,32 @@ void ampliar(Heap* pq){
     }
 }
 
-void heap_push(Heap* pq, void* data, int priority) {
+void heap_push(Heap* pq, void* data, int priority){
     if (pq->size == pq->capac) {
         ampliar(pq);
     }
 
+    bool entro = false;
     pq->heapArray[pq->size].data = data;
     pq->heapArray[pq->size].priority = priority;
-    int k = pq->size;
+    int anteriorK = pq->size;
+    for (int k = pq->size;k > 0 || entro == false;k = (k-1)/2)
+    {
+        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority)
+        {
+            int aux = pq->heapArray[k].priority;
+            pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
+            pq->heapArray[anteriorK].priority = aux;
 
-    while (k > 0) {
-        int parent = (k - 1) / 2;
-
-        if (pq->heapArray[k].priority < pq->heapArray[parent].priority) {
-            // Swap the current element with its parent
-            int temp_priority = pq->heapArray[k].priority;
-            void* temp_data = pq->heapArray[k].data;
-
-            pq->heapArray[k].priority = pq->heapArray[parent].priority;
-            pq->heapArray[k].data = pq->heapArray[parent].data;
-
-            pq->heapArray[parent].priority = temp_priority;
-            pq->heapArray[parent].data = temp_data;
-
-            k = parent;  // Move up in the heap
-        } else {
-            break;  // No need to swap further
+            void* data = pq->heapArray[k].data;
+            pq->heapArray[k].data = pq->heapArray[anteriorK].data;
+            pq->heapArray[anteriorK].data = data;
         }
+        anteriorK = k;
+        if (k == 0) entro = true;
     }
-
     pq->size++;
 }
-
 
 void heap_pop(Heap* pq){
     if (pq->size == 0){
