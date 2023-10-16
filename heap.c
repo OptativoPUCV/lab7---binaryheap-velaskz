@@ -46,40 +46,49 @@ void heap_push(Heap* pq, void* data, int priority){
 
 }
 
-void heap_pop(Heap* pq){
-    
+void heap_pop(Heap* pq) {
     if (pq->size == 0) {
         return;
     }
 
-    pq->heapArray[0] = pq->heapArray[pq->size - 1];
+    pq->heapArray[0].data = pq->heapArray[pq->size - 1].data;
+    pq->heapArray[0].priority = pq->heapArray[pq->size - 1].priority;
     pq->size--;
 
-    int i = 0;
-    int izquierda = 1;
-    int derecha = 2;
-    int largo = i;
+    size_t k = 0;
+    size_t anteriorK = k;
 
-    while (1) {
-        if (izquierda < pq->size && pq->heapArray[izquierda].priority > pq->heapArray[largo].priority) {
-            largo = izquierda;
+    int izquierda = 2 * k + 1;
+    int derecha = 2 * k + 2;
+
+    while (izquierda < pq->size || derecha < pq->size) {
+        anteriorK = k;
+
+        if (izquierda < pq->size && derecha < pq->size) {
+            if (pq->heapArray[izquierda].priority < pq->heapArray[derecha].priority) {
+                k = derecha;
+            } else {
+                k = izquierda;
+            }
+        } else if (izquierda < pq->size) {
+            k = izquierda;
+        } else if (derecha < pq->size) {
+            k = derecha;
         }
-        if (derecha < pq->size && pq->heapArray[derecha].priority > pq->heapArray[largo].priority) {
-            largo = derecha;
-        }
-        if (largo == i) {
-            break;
-        }
-        // Intercambiar elementos si es necesario
-        heapElem temp = pq->heapArray[i];
-        pq->heapArray[i] = pq->heapArray[largo];
-        pq->heapArray[largo] = temp;
-        i = largo;
-        izquierda = 2 * i + 1;
-        derecha = 2 * i + 2;
+
+        int aux = pq->heapArray[k].priority;
+        pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
+        pq->heapArray[anteriorK].priority = aux;
+
+        void* data = pq->heapArray[k].data;
+        pq->heapArray[k].data = pq->heapArray[anteriorK].data;
+        pq->heapArray[anteriorK].data = data;
+
+        izquierda = 2 * k + 1;
+        derecha = 2 * k + 2;
     }
-
 }
+
 
 Heap* createHeap(){
     Heap* nuevoHeap = (Heap*)malloc(sizeof(Heap));
