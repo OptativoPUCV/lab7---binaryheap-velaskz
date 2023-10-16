@@ -25,6 +25,10 @@ void* heap_top(Heap* pq){
 }
 
 
+int parent(int i){
+  return (i-1)/2;
+}
+
 void swapElements(heapElem* a, heapElem* b) {
     // Intercambia los elementos 'data' y 'priority'
     int aux_priority = a->priority;
