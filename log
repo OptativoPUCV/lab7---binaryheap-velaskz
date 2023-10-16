@@ -309,3 +309,9 @@ heap.c:50:10: error: ‘heap_pop’ defined but not used [-Werror=unused-functio
 cc1: all warnings being treated as errors
 Compilation failed
 5f1a71f
+Mon 16 Oct 2023 01:18:50 AM UTC: 
+ heap.c | 2 --
+ 1 file changed, 2 deletions(-)
+ tests:  4|1
+total_score: 50/70
+c141d36

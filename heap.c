@@ -47,43 +47,41 @@ void heap_push(Heap* pq, void* data, int priority){
 }
 
 void heap_pop(Heap* pq) {
-    void heap_pop(Heap* pq) {
-        if (pq->size == 0) {
-            return;
-        }
-
-        pq->heapArray[0] = pq->heapArray[pq->size - 1];
-        pq->size--;
-
-        int i = 0;
-        int left_child = 1;
-        int right_child = 2;
-        int largest = i;
-
-        while (1) {
-            if (left_child < pq->size && pq->heapArray[left_child].priority > pq->heapArray[largest].priority) {
-                largest = left_child;
-            }
-            if (right_child < pq->size && pq->heapArray[right_child].priority > pq->heapArray[largest].priority) {
-                largest = right_child;
-            }
-
-            if (largest == i) {
-                break;
-            }
-
-            // Intercambiar elementos si es necesario
-            heapElem temp = pq->heapArray[i];
-            pq->heapArray[i] = pq->heapArray[largest];
-            pq->heapArray[largest] = temp;
-
-            i = largest;
-            left_child = 2 * i + 1;
-            right_child = 2 * i + 2;
-        }
+    if (pq->size == 0) {
+        return;
     }
 
-} 
+    pq->heapArray[0] = pq->heapArray[pq->size - 1];
+    pq->size--;
+
+    int i = 0;
+    int left_child = 1;
+    int right_child = 2;
+    int largest = i;
+
+    while (1) {
+        if (left_child < pq->size && pq->heapArray[left_child].priority > pq->heapArray[largest].priority) {
+            largest = left_child;
+        }
+        if (right_child < pq->size && pq->heapArray[right_child].priority > pq->heapArray[largest].priority) {
+            largest = right_child;
+        }
+
+        if (largest == i) {
+            break;
+        }
+
+        // Intercambiar elementos si es necesario
+        heapElem temp = pq->heapArray[i];
+        pq->heapArray[i] = pq->heapArray[largest];
+        pq->heapArray[largest] = temp;
+
+        i = largest;
+        left_child = 2 * i + 1;
+        right_child = 2 * i + 2;
+    }
+}
+
 
 
 
