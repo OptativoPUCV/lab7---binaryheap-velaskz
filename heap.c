@@ -55,30 +55,30 @@ void heap_pop(Heap* pq) {
     pq->size--;
 
     int i = 0;
-    int left_child = 1;
-    int right_child = 2;
-    int largest = i;
+    int hijo_izquierda = 1;
+    int hijo_derecha = 2;
+    int masLargo = i;
 
     while (1) {
-        if (left_child < pq->size && pq->heapArray[left_child].priority > pq->heapArray[largest].priority) {
-            largest = left_child;
+        if (hijo_izquierda < pq->size && pq->heapArray[hijo_izquierda].priority > pq->heapArray[masLargo].priority) {
+            masLargo = hijo_izquierda;
         }
-        if (right_child < pq->size && pq->heapArray[right_child].priority > pq->heapArray[largest].priority) {
-            largest = right_child;
+        if (hijo_derecha < pq->size && pq->heapArray[hijo_derecha].priority > pq->heapArray[masLargo].priority) {
+            masLargo = hijo_derecha;
         }
 
-        if (largest == i) {
+        if (masLargo == i) {
             break;
         }
 
         // Intercambiar elementos si es necesario
         heapElem temp = pq->heapArray[i];
-        pq->heapArray[i] = pq->heapArray[largest];
-        pq->heapArray[largest] = temp;
+        pq->heapArray[i] = pq->heapArray[masLargo];
+        pq->heapArray[masLargo] = temp;
 
-        i = largest;
-        left_child = 2 * i + 1;
-        right_child = 2 * i + 2;
+        i = masLargo;
+        hijo_izquierda = 2 * i + 1;
+        hijo_derecha = 2 * i + 2;
     }
 }
 
