@@ -40,27 +40,30 @@ void heap_push(Heap* pq, void* data, int priority) {
         ampliar(pq);
     }
 
-    heapElem nuevoElemento;
-    nuevoElemento.data = data;
-    nuevoElemento.priority = priority;
+    pq->heapArray[pq->size].data = data;
+    pq->heapArray[pq->size].priority = priority;
 
     int k = pq->size;
+    bool entro = false;
 
-    while (k > 0) {
-        int parent = (k - 1) / 2;
+    while (k > 0 || entro == false) {
+        int anteriorK = k;
+        if (pq->heapArray[k].priority < pq->heapArray[anteriorK].priority) {
+            int aux = pq->heapArray[k].priority;
+            pq->heapArray[k].priority = pq->heapArray[anteriorK].priority;
+            pq->heapArray[anteriorK].priority = aux;
 
-        if (pq->heapArray[k].priority < pq->heapArray[parent].priority) {
-            // Intercambiar elementos si la prioridad del hijo es menor que la del padre
-            heapElem temp = pq->heapArray[k];
-            pq->heapArray[k] = pq->heapArray[parent];
-            pq->heapArray[parent] = temp;
-            k = parent;
-        } else {
-            break;
+            void* temp = pq->heapArray[k].data;
+            pq->heapArray[k].data = pq->heapArray[anteriorK].data;
+            pq->heapArray[anteriorK].data = temp;
         }
+        anteriorK = k;
+        if (k == 0) {
+            entro = true;
+        }
+        k = (k - 1) / 2;
     }
 
-    pq->heapArray[k] = nuevoElemento;
     pq->size++;
 }
 
