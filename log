@@ -401,3 +401,9 @@ heap.c:39:9: error: implicit declaration of function ‘agrandarArreglo’ [-Wer
 cc1: all warnings being treated as errors
 Compilation failed
 47fd67b
+Mon 16 Oct 2023 01:44:54 AM UTC: 
+ heap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests:  3|1
+total_score: 45/70
+e55bf29

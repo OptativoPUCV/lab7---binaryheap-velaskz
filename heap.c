@@ -36,7 +36,7 @@ void ampliar(Heap* pq){
 
 void heap_push(Heap* pq, void* data, int priority) {
     if (pq->size == pq->capac) {
-        agrandarArreglo(pq);
+        ampliar(pq);
     }
 
     heapElem nuevoElemento;
