@@ -327,3 +327,9 @@ Mon 16 Oct 2023 01:20:54 AM UTC:
  tests:  4|1
 total_score: 50/70
 34f4f34
+Mon 16 Oct 2023 01:24:49 AM UTC: 
+ heap.c | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
+ tests:  4|1
+total_score: 50/70
+2af69c4
